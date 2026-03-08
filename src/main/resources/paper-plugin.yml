@@ -1,0 +1,5 @@
+name: Pillars
+version: '1.0-SNAPSHOT'
+main: xyz.hajsori.pillars.Pillars
+api-version: '1.21'
+authors: [ Hajsori ]
