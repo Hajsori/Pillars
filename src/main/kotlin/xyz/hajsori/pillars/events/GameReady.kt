@@ -65,9 +65,9 @@ class GameReady(plugin: Pillars, center: Location, players: Array<Player?>) : Ev
 
         scheduler.runTaskTimer(plugin, { task ->
             for (player in plugin.server.worlds[0].players) {
-                val randomItem = ItemStack(Material.entries.filter { material ->
+                val randomItem = ItemStack(Registry.MATERIAL.stream().filter { material ->
                     material.isItem && !plugin.forbiddenItems.contains(material)
-                }.random())
+                }.toList().random())
                 if (randomItem == ItemStack(Material.POTION) || randomItem == ItemStack(Material.SPLASH_POTION) || randomItem == ItemStack(Material.LINGERING_POTION) ) {
                     val randomEffect = Registry.POTION.keyStream().toList().random()
 
