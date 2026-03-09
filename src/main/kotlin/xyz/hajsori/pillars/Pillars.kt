@@ -29,28 +29,7 @@ class Pillars : JavaPlugin() {
     )
 
     override fun onEnable() {
-        val scheduler = this.server.scheduler
-
         server.pluginManager.registerEvents(ChatListener(this), this)
-
-        scheduler.runTaskTimer(this, { task ->
-            for (player in this.server.worlds[0].players) {
-                val randomItem = ItemStack(Material.entries.filter { material ->
-                    material.isItem && !forbiddenItems.contains(material)
-                }.random())
-                if (randomItem == ItemStack(Material.POTION) || randomItem == ItemStack(Material.SPLASH_POTION) || randomItem == ItemStack(Material.LINGERING_POTION) ) {
-                    val randomEffect = Registry.POTION.keyStream().toList().random()
-
-                    if (randomItem.itemMeta is PotionMeta) {
-                        val meta = randomItem.itemMeta as PotionMeta
-                        meta.basePotionType = Registry.POTION.get(randomEffect)
-                        randomItem.itemMeta = meta
-                    }
-                }
-
-                player.give(listOf(randomItem), false)
-            }
-        }, 0, 60)
     }
 
     override fun onDisable() {
